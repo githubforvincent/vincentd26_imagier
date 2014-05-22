@@ -8,22 +8,40 @@
 
 #import "VDEViewController.h"
 
+
+
 @interface VDEViewController ()
 
 @end
 
 @implementation VDEViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+-(BOOL) shouldAutorotate {
+	//--------------------------------------------------------------------------------------------------------
+    return YES;
 }
 
-- (void)didReceiveMemoryWarning
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)o duration:(NSTimeInterval)d
+//--------------------------------------------------------------------------------------------------------
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [vue vdeAffichageSuivantOrientation:o];
+    
 }
+- (void)viewDidLoad {
+	//--------------------------------------------------------------------------------------------------------
+    
+    [super viewDidLoad];
+    vue = [[VDEMyView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [[self view] addSubview:vue];}
+
+- (void)didReceiveMemoryWarning {
+	//--------------------------------------------------------------------------------------------------------
+    [super didReceiveMemoryWarning];
+    NSLog(@"Alerte mémoire");
+    
+    
+}
+
+
 
 @end

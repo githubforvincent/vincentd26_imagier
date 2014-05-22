@@ -22,6 +22,9 @@
 		123E6176192DF4A400AFAF26 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 123E6155192DF4A400AFAF26 /* UIKit.framework */; };
 		123E617E192DF4A400AFAF26 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 123E617C192DF4A400AFAF26 /* InfoPlist.strings */; };
 		123E6180192DF4A400AFAF26 /* vincentd26_imagierTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 123E617F192DF4A400AFAF26 /* vincentd26_imagierTests.m */; };
+		123E618B192DFDB100AFAF26 /* VDEMyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 123E618A192DFDB100AFAF26 /* VDEMyView.m */; };
+		123E618E192E0A5400AFAF26 /* hauteur_gris.png in Resources */ = {isa = PBXBuildFile; fileRef = 123E618C192E0A5400AFAF26 /* hauteur_gris.png */; };
+		123E618F192E0A5400AFAF26 /* largeur_gris.png in Resources */ = {isa = PBXBuildFile; fileRef = 123E618D192E0A5400AFAF26 /* largeur_gris.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,10 @@
 		123E617B192DF4A400AFAF26 /* vincentd26_imagierTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "vincentd26_imagierTests-Info.plist"; sourceTree = "<group>"; };
 		123E617D192DF4A400AFAF26 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		123E617F192DF4A400AFAF26 /* vincentd26_imagierTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = vincentd26_imagierTests.m; sourceTree = "<group>"; };
+		123E6189192DFDB100AFAF26 /* VDEMyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDEMyView.h; sourceTree = "<group>"; };
+		123E618A192DFDB100AFAF26 /* VDEMyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDEMyView.m; sourceTree = "<group>"; };
+		123E618C192E0A5400AFAF26 /* hauteur_gris.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hauteur_gris.png; sourceTree = "<group>"; };
+		123E618D192E0A5400AFAF26 /* largeur_gris.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = largeur_gris.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +121,8 @@
 		123E6157192DF4A400AFAF26 /* vincentd26_imagier */ = {
 			isa = PBXGroup;
 			children = (
+				123E6189192DFDB100AFAF26 /* VDEMyView.h */,
+				123E618A192DFDB100AFAF26 /* VDEMyView.m */,
 				123E6160192DF4A400AFAF26 /* VDEAppDelegate.h */,
 				123E6161192DF4A400AFAF26 /* VDEAppDelegate.m */,
 				123E6163192DF4A400AFAF26 /* Main_iPhone.storyboard */,
@@ -121,6 +130,7 @@
 				123E6169192DF4A400AFAF26 /* VDEViewController.h */,
 				123E616A192DF4A400AFAF26 /* VDEViewController.m */,
 				123E616C192DF4A400AFAF26 /* Images.xcassets */,
+				123E6190192E0A5C00AFAF26 /* Images */,
 				123E6158192DF4A400AFAF26 /* Supporting Files */,
 			);
 			path = vincentd26_imagier;
@@ -153,6 +163,15 @@
 				123E617C192DF4A400AFAF26 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		123E6190192E0A5C00AFAF26 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				123E618C192E0A5400AFAF26 /* hauteur_gris.png */,
+				123E618D192E0A5400AFAF26 /* largeur_gris.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +255,8 @@
 				123E616D192DF4A400AFAF26 /* Images.xcassets in Resources */,
 				123E6165192DF4A400AFAF26 /* Main_iPhone.storyboard in Resources */,
 				123E615C192DF4A400AFAF26 /* InfoPlist.strings in Resources */,
+				123E618E192E0A5400AFAF26 /* hauteur_gris.png in Resources */,
+				123E618F192E0A5400AFAF26 /* largeur_gris.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +277,7 @@
 			files = (
 				123E6162192DF4A400AFAF26 /* VDEAppDelegate.m in Sources */,
 				123E615E192DF4A400AFAF26 /* main.m in Sources */,
+				123E618B192DFDB100AFAF26 /* VDEMyView.m in Sources */,
 				123E616B192DF4A400AFAF26 /* VDEViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

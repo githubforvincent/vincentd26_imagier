@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VDEMyView.h"
 
-@interface VDEViewController : UIViewController
+@interface VDEViewController : UIViewController {
+    VDEMyView *vue;
+}
 
 @end
