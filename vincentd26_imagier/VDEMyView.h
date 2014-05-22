@@ -11,9 +11,7 @@
 
 @interface VDEMyView : UIView < UIScrollViewDelegate > {
 	
-	UISegmentedControl	*vdeSegmentedChoixPhotos;
 	UISegmentedControl	*vdeSegmentedControlZoom;
-	
 	UIStepper			*vdeStepperChoixPhotos;
 	
 	UIScrollView		*vdeScrollViewZoneZoomPhoto;
@@ -25,9 +23,12 @@
 	UILabel             *vdeLabelRatioLargeur;
 	UILabel             *vdeLabelRatioHauteur;
 	
-	UIView				*vdeSousVueHaut;		// 10% hauteur
-	UIView				*vdeSousVueZoneZoom;	// 60% hauteur
-	UIView				*vdeSousVueBas;			// 30% hauteur
+	UIView				*vdeSousVueHaut;
+	UIView				*vdeSousVueZoneZoom;
+	UIView				*vdeSousVueBas;
+	
+	UIImage				*vdePhotoAAfficher;
+	UIImageView			*vdeVueImageAInclureDansScrollView;
 	
 	CGRect				vdeMaFrame;
 	BOOL				isIpad;
