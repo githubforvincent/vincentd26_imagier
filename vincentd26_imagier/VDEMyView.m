@@ -11,10 +11,6 @@
 
 @interface VDEMyView ()
 
-
-//@property (nonatomic, strong) UIImage	* vdePhotoAAfficher;
-//@property (nonatomic, strong) UIImageView * vdeVueImageAInclureDansScrollView;
-
 @end
 
 @implementation VDEMyView
@@ -417,12 +413,12 @@
 
 -(void) vdeAffichePhoto {
 	
-	vdePhotoAAfficher					= [UIImage imageNamed:vdeLabelNomPhoto.text];
+	vdePhotoAAfficher						= [UIImage imageNamed:vdeLabelNomPhoto.text];
 	vdeVueImageAInclureDansScrollView.image =vdePhotoAAfficher;
-	vdeSliderLargeur.value		= 25;
-	vdeSliderHauteur.value		= 25;
-	vdeLabelRatioLargeur.text	= [NSString stringWithFormat:@"%d %%", 25];
-	vdeLabelRatioHauteur.text	= [NSString stringWithFormat:@"%d %%", 25];
+	vdeSliderLargeur.value					= 25;
+	vdeSliderHauteur.value					= 25;
+	vdeLabelRatioLargeur.text				= [NSString stringWithFormat:@"%d %%", 25];
+	vdeLabelRatioHauteur.text				= [NSString stringWithFormat:@"%d %%", 25];
 
 	[self vdeRedimensionnePhoto];
 	
@@ -439,6 +435,7 @@
 																		0,
 																		vdeTailleImageLargeur,
 																		vdeTailleImageHauteur)];
+	
 	
 	// On donne la taille de la vue à l'intérieur de la subview pour permettre le glisser jusqu'au limite de l'image
 	//-----------------------------------------------------------------------------------------------------------
@@ -457,7 +454,15 @@
 	return vdeVueImageAInclureDansScrollView;
 }
 
+//--------------------------------------------------------------------------------------------------------
 
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
+	// pour afficher la nouvelel valeur de zoom mais...quand l'image zoomée est déjà déformée, c'est un peu faux....
+	vdeSliderLargeur.value		= scale;
+	vdeSliderHauteur.value		= scale;
+	vdeLabelRatioLargeur.text	= [NSString stringWithFormat:@"%d %%",(int) (scale*100)];
+	vdeLabelRatioHauteur.text	= [NSString stringWithFormat:@"%d %%",(int) (scale*100)];
+}
 
 @end
 
