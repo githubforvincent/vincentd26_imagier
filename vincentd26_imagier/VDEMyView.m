@@ -84,25 +84,6 @@
 	
 	
 	
-	// configuration du label ratio largeur
-	//--------------------------------------------------------------------------------------------------------
-	vdeLabelRatioLargeur					= [[UILabel alloc ]init];
-	vdeLabelRatioLargeur.TextAlignment		= NSTextAlignmentRight;
-	vdeLabelRatioLargeur.font				= [UIFont systemFontOfSize:14];
-	vdeLabelRatioLargeur.textColor			= [UIColor grayColor];
-	
-	//[vdeSousVueBas addSubview:vdeLabelRatioLargeur];
-	
-	// configuration du label ratio hauteur
-	//--------------------------------------------------------------------------------------------------------
-	vdeLabelRatioHauteur					= [[UILabel alloc ]init];
-	vdeLabelRatioHauteur.TextAlignment		= NSTextAlignmentRight;
-	vdeLabelRatioHauteur.font				= [UIFont systemFontOfSize:14];
-	vdeLabelRatioHauteur.textColor			= [UIColor grayColor];
-	
-	//[vdeSousVueBas addSubview:vdeLabelRatioHauteur];
-	
-	
 	//configuration  du slider largeur
     //--------------------------------------------------------------------------------------------------------
     vdeSliderLargeur					= [[UISlider alloc] init];
@@ -112,8 +93,20 @@
     vdeSliderLargeur.value				= 100;
 	vdeSliderLargeur.minimumValueImage	= [UIImage imageNamed:@"largeur_gris"];
     [vdeSliderLargeur addTarget:self action:@selector(vdeActionSliderLargeur) forControlEvents:UIControlEventValueChanged ];
-
-    //[vdeSousVueBas addSubview:vdeSliderLargeur];
+	
+    [vdeSousVueBas addSubview:vdeSliderLargeur];
+	
+	
+	// configuration du label ratio largeur
+	//--------------------------------------------------------------------------------------------------------
+	vdeLabelRatioLargeur					= [[UILabel alloc ]init];
+	vdeLabelRatioLargeur.TextAlignment		= NSTextAlignmentRight;
+	vdeLabelRatioLargeur.font				= [UIFont systemFontOfSize:14];
+	vdeLabelRatioLargeur.textColor			= [UIColor grayColor];
+	vdeLabelRatioLargeur.text				= @"400%"; // pour test
+	
+	[vdeSousVueBas addSubview:vdeLabelRatioLargeur];
+	
 	
 	//configuration  du slider hauteur
     //--------------------------------------------------------------------------------------------------------
@@ -125,19 +118,35 @@
 	vdeSliderHauteur.minimumValueImage	= [UIImage imageNamed:@"hauteur_gris"];
     [vdeSliderHauteur addTarget:self action:@selector(vdeActionSliderHauteur) forControlEvents:UIControlEventValueChanged ];
 	
-	// [vdeSousVueBas addSubview:vdeSliderHauteur];
+	[vdeSousVueBas addSubview:vdeSliderHauteur];
+	
+	// configuration du label ratio hauteur
+	//--------------------------------------------------------------------------------------------------------
+	vdeLabelRatioHauteur					= [[UILabel alloc ]init];
+	vdeLabelRatioHauteur.TextAlignment		= NSTextAlignmentRight;
+	vdeLabelRatioHauteur.font				= [UIFont systemFontOfSize:14];
+	vdeLabelRatioHauteur.textColor			= [UIColor grayColor];
+	vdeLabelRatioHauteur.text				= @"25%"; // pour test
+	
+	[vdeSousVueBas addSubview:vdeLabelRatioHauteur];
+	
+
 						   
    //configuration du segment pour zoom
    //--------------------------------------------------------------------------------------------------------
    
-   vdeTableauLabelSegments = @[@"25%",@"50%",@"100%",@"200%",@"400%"];
-   vdeSegmentedControlZoom = [[UISegmentedControl alloc] initWithItems:vdeTableauLabelSegments];
-   [vdeSegmentedControlZoom addTarget:self action:@selector(vdeActionSegmentZoom) forControlEvents:UIControlEventValueChanged];
+	vdeTableauLabelSegments = @[@"25%",@"50%",@"100%",@"200%",@"400%"];
+	vdeSegmentedControlZoom = [[UISegmentedControl alloc] initWithItems:vdeTableauLabelSegments];
+	
+	//Taille police pour segment( source Internet )
+	UIFont *segmentFont = [UIFont systemFontOfSize:14.0f];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:segmentFont forKey:NSFontAttributeName];
+    [vdeSegmentedControlZoom setTitleTextAttributes:attributes forState:UIControlStateNormal];
+	
+	[vdeSegmentedControlZoom addTarget:self action:@selector(vdeActionSegmentZoom) forControlEvents:UIControlEventValueChanged];
+	
    
-	//[vdeSousVueBas addSubview:vdeSegmentedControlZoom];
-		
-
-
+	[vdeSousVueBas addSubview:vdeSegmentedControlZoom];
 	
 	
     // positionnement des frames
@@ -181,76 +190,141 @@
 	//--------------------------------------------------------------------------------------------------------
 
 	// TEST À FAIR EPOUR MODE PORTRAIT OU PAYSAGE
-	float vdeRatioSousVueHaut		= 0.1; // en %
-	float vdeRatioSousVueZoneZoom	= 0.6;
-	float vdeRatioSousVueBas		= 0.3;
+	
+	int vdeHauteurMiniSousVueHaut	= 50;
+	int vdeHauteurMiniSousVueBas	= 150;
+	int vdeHauteurCalculeeZoom		= vdeHauteurVue-vdeHauteurMiniSousVueBas-vdeHauteurMiniSousVueHaut;
 	
     int vdeXSousVueHaut				= 0;
     int vdeYSousVueHaut				= vdeMargeHaut;
 	int vdeLargeurSousVueHaut		= vdeLargeurVue;
-	int vdeHauteurSousVueHaut		= vdeHauteurVue*vdeRatioSousVueHaut;
+	int vdeHauteurSousVueHaut		= vdeHauteurMiniSousVueHaut;
+	//int vdeHauteurSousVueHaut		= (vdeHauteurVue-vdeHauteurMiniSousVueBas)*vdeRatioSousVueHaut;
 	
     int vdeXSousVueZoneZoom			= 0;
     int vdeYSousVueZoneZoom			= vdeHauteurSousVueHaut+vdeMargeHaut;;
 	int vdeLargeurSousVueZoneZoom	= vdeLargeurVue;
-	int vdeHauteurSousVueZoneZoom	= vdeHauteurVue*vdeRatioSousVueZoneZoom;
+	int vdeHauteurSousVueZoneZoom	= vdeHauteurCalculeeZoom;
 	
     int vdeXSousVueBas				= 0;
-    int vdeYSousVueBas				= vdeHauteurSousVueHaut+vdeHauteurSousVueZoneZoom;
+    int vdeYSousVueBas				= vdeHauteurSousVueHaut+vdeHauteurSousVueZoneZoom+vdeMargeHaut;
 	int vdeLargeurSousVueBas		= vdeLargeurVue;
-	int vdeHauteurSousVueBas		= vdeHauteurVue*vdeRatioSousVueBas;
+	int vdeHauteurSousVueBas		= vdeHauteurMiniSousVueBas;
 
 	
 	// Calcul des dimensions et coordonnées pour les éléments de chaque sous vue et placement
 	//--------------------------------------------------------------------------------------------------------
 		
-		// TEST A FAIRE POUE LE MODE PORTRAIT PU PAYSAGE
-		int vdeHauteurElement	= 30;
 	
-		// Zone Haut
-		//--------------------------------------------------------------------------------------------------------
+	// Zone Haut
+	//--------------------------------------------------------------------------------------------------------
+
+	float vdeRatioEspacementZoneHaut		= 0.2; // deux espacements
+	float vdeRatioHauteurElementZoneHaut	= 0.6;
+
+	int vdeXSegmentedChoixPhotos			= vdeMargeLaterale;
+	int vdeYSegmentedChoixPhotos			= vdeHauteurSousVueHaut*vdeRatioEspacementZoneHaut;
+	int vdeLargeurSegmentedChoixPhotos		= vdeLargeurVue/4; // 1/4 de la largeur
+	int vdeHauteurSegmentedChoixPhotos		= vdeHauteurSousVueHaut*vdeRatioHauteurElementZoneHaut;
+
+	[vdeSegmentedChoixPhotos setFrame:CGRectMake(vdeXSegmentedChoixPhotos,
+												 vdeYSegmentedChoixPhotos,
+												 vdeLargeurSegmentedChoixPhotos,
+												 vdeHauteurSegmentedChoixPhotos)];
+	
+	int vdeXLabelNomPhoto					= vdeLargeurSegmentedChoixPhotos+vdeMargeLaterale; // texte positionné à droite
+	int vdeYLabelNomPhoto					= vdeHauteurSousVueHaut*vdeRatioEspacementZoneHaut;;
+	int vdeLargeurLabelNomPhoto				= vdeLargeurVue-2*vdeMargeLaterale-vdeLargeurSegmentedChoixPhotos; // 3/4 de la largeur
+	int vdeHauteurLabelNomPhoto				= vdeHauteurSousVueHaut*vdeRatioHauteurElementZoneHaut;
+
+	[vdeLabelNomPhoto setFrame:CGRectMake(vdeXLabelNomPhoto,
+										  vdeYLabelNomPhoto,
+										  vdeLargeurLabelNomPhoto,
+										  vdeHauteurLabelNomPhoto)];
 
 
-		int vdeXSegmentedChoixPhotos			= vdeMargeLaterale;
-		int vdeYSegmentedChoixPhotos			= 0;
-		int vdeLargeurSegmentedChoixPhotos		= vdeLargeurVue/4; // 1/4 de la largeur
-		int vdeHauteurSegmentedChoixPhotos		= vdeHauteurElement;
+	// Zone zoom
+	//--------------------------------------------------------------------------------------------------------
+	int vdeXScrollViewZoneZoomPhoto				= 0;
+	int vdeYScrollViewZoneZoomPhoto				= 0;
+	int vdeLargeurScrollViewZoneZoomPhoto		= vdeLargeurVue;
+	int vdeHauteurScrollViewZoneZoomPhoto		= vdeHauteurCalculeeZoom;
+
+	[vdeScrollViewZoneZoomPhoto	setFrame:CGRectMake(vdeXScrollViewZoneZoomPhoto,
+													vdeYScrollViewZoneZoomPhoto,
+													vdeLargeurScrollViewZoneZoomPhoto,
+													vdeHauteurScrollViewZoneZoomPhoto)];
+
+	// Zone bas
+	//--------------------------------------------------------------------------------------------------------
 	
-		[vdeSegmentedChoixPhotos setFrame:CGRectMake(vdeXSegmentedChoixPhotos,
-													 vdeYSegmentedChoixPhotos,
-													 vdeLargeurSegmentedChoixPhotos,
-													 vdeHauteurSegmentedChoixPhotos)];
-		
-		int vdeXLabelNomPhoto					= vdeLargeurSegmentedChoixPhotos; // texte positionné à droite
-		int vdeYLabelNomPhoto					= 0;
-		int vdeLargeurLabelNomPhoto				= (vdeLargeurVue/4)*3-vdeMargeLaterale; // 3/4 de la largeur
-		int vdeHauteurLabelNomPhoto				= vdeHauteurElement;
+	int vdeHauteurFixeElementsBas				= 45;
+	int vdeHauteurFixeSegmentedControlZoom		= 25;
 	
-		[vdeLabelNomPhoto setFrame:CGRectMake(vdeXLabelNomPhoto,
-											  vdeYLabelNomPhoto,
-											  vdeLargeurLabelNomPhoto,
-											  vdeHauteurLabelNomPhoto)];
-	
-	
-		// Zone zoom
-		//--------------------------------------------------------------------------------------------------------
-		int vdeXScrollViewZoneZoomPhoto				= 0;
-		int vdeYScrollViewZoneZoomPhoto				= 0;
-		int vdeLargeurScrollViewZoneZoomPhoto		= vdeLargeurVue;
-		int vdeHauteurScrollViewZoneZoomPhoto		= vdeHauteurVue*vdeRatioSousVueZoneZoom;
-	
-		[vdeScrollViewZoneZoomPhoto	setFrame:CGRectMake(vdeXScrollViewZoneZoomPhoto,
-														vdeYScrollViewZoneZoomPhoto,
-														vdeLargeurScrollViewZoneZoomPhoto,
-														vdeHauteurScrollViewZoneZoomPhoto)];
+	int vdeEspacementZoneBas					= 0;
 
 	
- 
+	//-------------------------------------------------------------------------
+	int vdeXSliderLargeur			= vdeMargeLaterale;
+	int vdeYSliderLargeur			= vdeEspacementZoneBas;
+	int vdeLargeurSliderLargeur		= vdeLargeurVue*(4/5); // 4/5ième de la largeur
+	int vdeHauteurSliderLargeur		= vdeHauteurFixeElementsBas;
 	
+	[vdeSliderLargeur setFrame:CGRectMake(vdeXSliderLargeur,
+										  vdeYSliderLargeur,
+										  vdeLargeurSliderLargeur,
+										  vdeHauteurSliderLargeur)];
+	
+	//-------------------------------------------------------------------------
+	int vdeXLabelRatioLargeur			= vdeMargeLaterale + vdeLargeurSliderLargeur;
+	int vdeYLabelRatioLargeur			= vdeEspacementZoneBas;
+	int vdeLargeurLabelRatioLargeur		= vdeLargeurVue- vdeLargeurSliderLargeur-2*vdeMargeLaterale;
+	int vdeHauteurLabelRatioLargeur		= vdeHauteurFixeElementsBas;
+	
+	
+	[vdeLabelRatioLargeur setFrame:CGRectMake(vdeXLabelRatioLargeur,
+											  vdeYLabelRatioLargeur,
+											  vdeLargeurLabelRatioLargeur,
+											  vdeHauteurLabelRatioLargeur)];
+	
+	//-------------------------------------------------------------------------
+	int vdeXSliderHauteur			= vdeMargeLaterale;
+	int vdeYSliderHauteur			= 2*vdeEspacementZoneBas+vdeHauteurSliderLargeur;
+	int vdeLargeurSliderHauteur		= vdeLargeurVue*(4/5); // 4/5ième de la largeur
+	int vdeHauteurSliderHauteur		= vdeHauteurFixeElementsBas;
+	
+	[vdeSliderHauteur setFrame:CGRectMake(vdeXSliderHauteur,
+										  vdeYSliderHauteur,
+										  vdeLargeurSliderHauteur,
+										  vdeHauteurSliderHauteur)];
+	
+	//-------------------------------------------------------------------------
+	int vdeXLabelRatioHauteur			= vdeMargeLaterale + vdeLargeurSliderLargeur;
+	int vdeYLabelRatioHauteur			= 2*vdeEspacementZoneBas+vdeHauteurSliderLargeur;
+	int vdeLargeurLabelRatioHauteur		= vdeLargeurVue- vdeLargeurSliderLargeur-2*vdeMargeLaterale;
+	int vdeHauteurLabelRatioHauteur		= vdeHauteurFixeElementsBas;
+	
+	[vdeLabelRatioHauteur setFrame:CGRectMake(vdeXLabelRatioHauteur	,
+											  vdeYLabelRatioHauteur	,
+											  vdeLargeurLabelRatioHauteur,
+											  vdeHauteurLabelRatioHauteur)];
+	
+	//-------------------------------------------------------------------------
+	int vdeXSegmentedControlZoom			= vdeMargeLaterale ;
+	int vdeYSegmentedControlZoom			= 3*vdeEspacementZoneBas+2*vdeHauteurFixeElementsBas;
+	int vdeLargeurSegmentedControlZoom		= vdeLargeurVue-2*vdeMargeLaterale;
+	int vdeHauteurSegmentedControlZoom		= vdeHauteurFixeSegmentedControlZoom;
+
+	
+	[vdeSegmentedControlZoom setFrame:CGRectMake(vdeXSegmentedControlZoom,
+												 vdeYSegmentedControlZoom	,
+												 vdeLargeurSegmentedControlZoom,
+												 vdeHauteurSegmentedControlZoom)];
 	
 	// placement des sous vue dans la fenetre
     //--------------------------------------------------------------------------------------------------------
     
+	
 	[vdeSousVueHaut		setFrame:CGRectMake(vdeXSousVueHaut,
 											vdeYSousVueHaut,
 											vdeLargeurSousVueHaut,
