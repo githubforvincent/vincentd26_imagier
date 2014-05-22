@@ -14,6 +14,8 @@
 	UISegmentedControl	*vdeSegmentedChoixPhotos;
 	UISegmentedControl	*vdeSegmentedControlZoom;
 	
+	UIStepper			*vdeStepperChoixPhotos;
+	
 	UIScrollView		*vdeScrollViewZoneZoomPhoto;
 	
 	UISlider			*vdeSliderLargeur;

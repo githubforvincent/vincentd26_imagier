@@ -9,6 +9,11 @@
 
 #import "VDEMyView.h"
 
+@interface VDEMyView ()
+
+@property ( nonatomic, strong) NSString * vdeNomPhoto;
+@property ( nonatomic, strong) UIImage	* vdePhotoAAfficher;
+@end
 
 @implementation VDEMyView
 
@@ -29,14 +34,10 @@
         }
     }
     
-
-	
 	//configuration subview du fond
     //--------------------------------------------------------------------------------------------------------
     // Pas de fond
-	
-
-	
+		
 	// configuration des sous-vue
 	//--------------------------------------------------------------------------------------------------------
 	vdeSousVueHaut		= [[UIView alloc] init];
@@ -46,17 +47,18 @@
 	[self addSubview:vdeSousVueHaut];
 	[self addSubview:vdeSousVueZoneZoom];
 	[self addSubview:vdeSousVueBas];
+    
 	
-    
-    //configuration du segment pour choix photo
+	//configuration du Stepper choix photo
     //--------------------------------------------------------------------------------------------------------
-    
-	NSArray *vdeTableauLabelSegments	= @[@"<",@">"];
-	vdeSegmentedChoixPhotos			= [[UISegmentedControl alloc] initWithItems:vdeTableauLabelSegments];
-    [vdeSegmentedChoixPhotos addTarget:self action:@selector(vdeActionSegmentPhotos) forControlEvents:UIControlEventValueChanged];
-    
-	[vdeSousVueHaut addSubview:vdeSegmentedChoixPhotos];
-		
+    vdeStepperChoixPhotos = [[UIStepper alloc] init];
+    vdeStepperChoixPhotos.maximumValue     = 20;
+    vdeStepperChoixPhotos.minimumValue     = 1;
+    vdeStepperChoixPhotos.stepValue        = 1;
+    [vdeStepperChoixPhotos addTarget:self action:@selector(vdeActionStepperChoixPhotos:) forControlEvents:UIControlEventValueChanged];
+	
+    [vdeSousVueHaut addSubview:vdeStepperChoixPhotos];
+
 	
 	// configuration du label nom de photo
 	//--------------------------------------------------------------------------------------------------------
@@ -64,11 +66,9 @@
 	vdeLabelNomPhoto.TextAlignment	= NSTextAlignmentRight;
 	vdeLabelNomPhoto.font			= [UIFont systemFontOfSize:14];
 	vdeLabelNomPhoto.textColor		= [UIColor grayColor];
-	vdeLabelNomPhoto.text			= @"photo1.jpg"; // pour test
+	vdeLabelNomPhoto.text			= @"photo-01.jpg"; // pour test
 
 	[vdeSousVueHaut addSubview:vdeLabelNomPhoto];
-	
-	
 	
 	// configuration scroll view
 	//--------------------------------------------------------------------------------------------------------
@@ -82,8 +82,6 @@
 	
 	[vdeSousVueZoneZoom addSubview:vdeScrollViewZoneZoomPhoto];
 	
-	
-	
 	//configuration  du slider largeur
     //--------------------------------------------------------------------------------------------------------
     vdeSliderLargeur					= [[UISlider alloc] init];
@@ -96,7 +94,6 @@
 	
     [vdeSousVueBas addSubview:vdeSliderLargeur];
 	
-	
 	// configuration du label ratio largeur
 	//--------------------------------------------------------------------------------------------------------
 	vdeLabelRatioLargeur					= [[UILabel alloc ]init];
@@ -106,8 +103,7 @@
 	vdeLabelRatioLargeur.text				= @"25%";
 	
 	[vdeSousVueBas addSubview:vdeLabelRatioLargeur];
-	
-	
+		
 	//configuration  du slider hauteur
     //--------------------------------------------------------------------------------------------------------
     vdeSliderHauteur			   = [[UISlider alloc] init];
@@ -131,11 +127,11 @@
 	[vdeSousVueBas addSubview:vdeLabelRatioHauteur];
 	
 
-						   
-   //configuration du segment pour zoom
-   //--------------------------------------------------------------------------------------------------------
+		
+	//configuration du segment pour zoom
+	//--------------------------------------------------------------------------------------------------------
    
-	vdeTableauLabelSegments = @[@"25%",@"50%",@"100%",@"200%",@"400%"];
+	NSArray * vdeTableauLabelSegments = @[@"25%",@"50%",@"100%",@"200%",@"400%"];
 	vdeSegmentedControlZoom = [[UISegmentedControl alloc] initWithItems:vdeTableauLabelSegments];
 	
 	//Taille police pour segment( source Internet )
@@ -145,8 +141,8 @@
 	
 	[vdeSegmentedControlZoom addTarget:self action:@selector(vdeActionSegmentZoom:) forControlEvents:UIControlEventValueChanged];
 	
-   
 	[vdeSousVueBas addSubview:vdeSegmentedControlZoom];
+
 	
 	
     // positionnement des frames
@@ -156,7 +152,6 @@
     
     return self;
 }
-
 
 - (void) vdeAffichageSuivantOrientation:(UIInterfaceOrientation) o {
 	//--------------------------------------------------------------------------------------------------------
@@ -184,8 +179,6 @@
 	int vdeMargeLaterale = 20;
 	int vdeMargeHaut	 = 30;
 	
-
-	
 	// Calcul des dimensions et coordonnées des sous vue
 	//--------------------------------------------------------------------------------------------------------
 	
@@ -211,34 +204,33 @@
 	
 	// Calcul des dimensions et coordonnées pour les éléments de chaque sous vue et placement
 	//--------------------------------------------------------------------------------------------------------
-		
-	
+			
 	// Zone Haut
 	//--------------------------------------------------------------------------------------------------------
 
 	float vdeRatioEspacementZoneHaut		= 0.2; // deux espacements
 	float vdeRatioHauteurElementZoneHaut	= 0.6;
 
-	int vdeXSegmentedChoixPhotos			= vdeMargeLaterale;
-	int vdeYSegmentedChoixPhotos			= vdeHauteurSousVueHaut*vdeRatioEspacementZoneHaut;
-	int vdeLargeurSegmentedChoixPhotos		= vdeLargeurVue/4; // 1/4 de la largeur
-	int vdeHauteurSegmentedChoixPhotos		= vdeHauteurSousVueHaut*vdeRatioHauteurElementZoneHaut;
-
-	[vdeSegmentedChoixPhotos setFrame:CGRectMake(vdeXSegmentedChoixPhotos,
-												 vdeYSegmentedChoixPhotos,
-												 vdeLargeurSegmentedChoixPhotos,
-												 vdeHauteurSegmentedChoixPhotos)];
+	int vdeXStepperChoixPhotos				= vdeMargeLaterale;
+	int vdeYStepperChoixPhotos				= vdeHauteurSousVueHaut*vdeRatioEspacementZoneHaut;
+	int vdeLargeurStepperChoixPhotos		= vdeLargeurVue/4; // 1/4 de la largeur
+	int vdeHauteurStepperChoixPhotos		= vdeHauteurSousVueHaut*vdeRatioHauteurElementZoneHaut;
 	
-	int vdeXLabelNomPhoto					= vdeLargeurSegmentedChoixPhotos+vdeMargeLaterale; // texte positionné à droite
+	[vdeStepperChoixPhotos setFrame:CGRectMake(vdeXStepperChoixPhotos,
+												 vdeYStepperChoixPhotos,
+												 vdeLargeurStepperChoixPhotos,
+												 vdeHauteurStepperChoixPhotos)];
+	
+	
+	int vdeXLabelNomPhoto					= vdeLargeurStepperChoixPhotos+vdeMargeLaterale; // texte positionné à droite
 	int vdeYLabelNomPhoto					= vdeHauteurSousVueHaut*vdeRatioEspacementZoneHaut;;
-	int vdeLargeurLabelNomPhoto				= vdeLargeurVue-2*vdeMargeLaterale-vdeLargeurSegmentedChoixPhotos; // 3/4 de la largeur
+	int vdeLargeurLabelNomPhoto				= vdeLargeurVue-2*vdeMargeLaterale-vdeLargeurStepperChoixPhotos; // 3/4 de la largeur
 	int vdeHauteurLabelNomPhoto				= vdeHauteurSousVueHaut*vdeRatioHauteurElementZoneHaut;
-
+	
 	[vdeLabelNomPhoto setFrame:CGRectMake(vdeXLabelNomPhoto,
 										  vdeYLabelNomPhoto,
 										  vdeLargeurLabelNomPhoto,
 										  vdeHauteurLabelNomPhoto)];
-
 
 	// Zone zoom
 	//--------------------------------------------------------------------------------------------------------
@@ -343,8 +335,16 @@
 //--------------------------------------------------------------------------------------------------------
 
 
--(void)vdeActionSegmentPhotos {
+-(void) vdeActionStepperChoixPhotos : (UIStepper *) sender {
 //--------------------------------------------------------------------------------------------------------
+	
+	if( sender.value < 10) {
+		self.vdeNomPhoto =[NSString stringWithFormat:@"%@%d%@",@"photo-0",(int)sender.value,@".jpg"];
+	} else {
+		self.vdeNomPhoto =[NSString stringWithFormat:@"%@%d%@",@"photo-",(int)sender.value,@".jpg"];
+	}
+	
+	vdeLabelNomPhoto.text = self.vdeNomPhoto;
 	
 }
 
@@ -390,12 +390,12 @@
 		vdeLabelRatioLargeur.text	= [NSString stringWithFormat:@"%d %%", vdeValeurZoom];
 		vdeLabelRatioHauteur.text	= [NSString stringWithFormat:@"%d %%", vdeValeurZoom];
 
-	vdeSegmentedControlZoom.selectedSegmentIndex = -1; // ruse de sioux....
+	vdeSegmentedControlZoom.selectedSegmentIndex = -1; // ruse de sioux pour déselectionner les segments
 }
+
 //--------------------------------------------------------------------------------------------------------
 // LES DELEGATES DE SCROLL VIEW
 //--------------------------------------------------------------------------------------------------------
-
 
 
 
