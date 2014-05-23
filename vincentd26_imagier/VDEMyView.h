@@ -33,6 +33,7 @@
 	CGRect				vdeMaFrame;
 	BOOL				isIpad;
 	UIImageView			*vdeImageEspace;
+	int					vdeValeurZoomDeDepart;
 }
 - (void) vdeAffichageSuivantOrientation:(UIInterfaceOrientation) o;
 
