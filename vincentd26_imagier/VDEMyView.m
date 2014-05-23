@@ -15,15 +15,18 @@
 
 @implementation VDEMyView
 
-
+//--------------------------------------------------------------------------------------------------------
+// AFFICHAGE INITIAL
 //--------------------------------------------------------------------------------------------------------
 -(id) initWithFrame:(CGRect)frame {
 //--------------------------------------------------------------------------------------------------------
     
     self= [super initWithFrame:frame ];
 	
-	
-    if( self) {
+
+    // Détermination type de terminal si besoin par la suite
+	//--------------------------------------------------------------------------------------------------------
+	if( self) {
         // recuperation du type de terminal
         if ( [[UIDevice currentDevice] userInterfaceIdiom ]== UIUserInterfaceIdiomPhone) {
             isIpad = NO;
@@ -33,6 +36,8 @@
     }
 	
 	// initialisation de la scrollView
+	//--------------------------------------------------------------------------------------------------------
+
 	vdeVueImageAInclureDansScrollView	= [[UIImageView alloc] init];
     
 	//configuration subview du fond
@@ -43,7 +48,7 @@
 	//--------------------------------------------------------------------------------------------------------
 	vdeSousVueHaut		= [[UIView alloc] init];
 	vdeSousVueZoneZoom	= [[UIView alloc] init];
-	vdeSousVueBas		= [[UIView alloc] init];
+	vdeSousVueBas			= [[UIView alloc] init];
 	
 	[self addSubview:vdeSousVueHaut];
 	[self addSubview:vdeSousVueZoneZoom];
@@ -67,20 +72,21 @@
 	vdeLabelNomPhoto.TextAlignment	= NSTextAlignmentRight;
 	vdeLabelNomPhoto.font			= [UIFont systemFontOfSize:14];
 	vdeLabelNomPhoto.textColor		= [UIColor grayColor];
-	vdeLabelNomPhoto.text			= @"photo-01.jpg"; // pour test
+	vdeLabelNomPhoto.text			= @"photo-01.jpg";
 
 	[vdeSousVueHaut addSubview:vdeLabelNomPhoto];
 	
 	// configuration scroll view
 	//--------------------------------------------------------------------------------------------------------
 	vdeScrollViewZoneZoomPhoto									= [[UIScrollView alloc ] init];
-	vdeScrollViewZoneZoomPhoto.delegate							= self;
+	vdeScrollViewZoneZoomPhoto.delegate						= self;
 	vdeScrollViewZoneZoomPhoto.scrollEnabled					= YES;
 	vdeScrollViewZoneZoomPhoto.showsHorizontalScrollIndicator	= YES;
 	vdeScrollViewZoneZoomPhoto.showsVerticalScrollIndicator		= YES;
 	vdeScrollViewZoneZoomPhoto.minimumZoomScale					= 0.10;
 	vdeScrollViewZoneZoomPhoto.maximumZoomScale					= 2.0;
-	vdeScrollViewZoneZoomPhoto.backgroundColor					=[UIColor blackColor];
+	vdeScrollViewZoneZoomPhoto.backgroundColor					= [UIColor blackColor];
+	
 
 	[vdeScrollViewZoneZoomPhoto addSubview:vdeVueImageAInclureDansScrollView]; // Vue à insérer dans le scrollView
 	
@@ -140,7 +146,7 @@
 	
 	//Taille police pour segment( source Internet )
 	UIFont *segmentFont = [UIFont systemFontOfSize:14.0f];
-    NSDictionary *attributes = [NSDictionary dictionaryWithObject:segmentFont forKey:NSFontAttributeName];
+	NSDictionary *attributes = [NSDictionary dictionaryWithObject:segmentFont forKey:NSFontAttributeName];
     [vdeSegmentedControlZoom setTitleTextAttributes:attributes forState:UIControlStateNormal];
 	
 	[vdeSegmentedControlZoom addTarget:self action:@selector(vdeActionSegmentZoom:) forControlEvents:UIControlEventValueChanged];
@@ -160,9 +166,8 @@
     return self;
 }
 
-
-
-- (void) vdeAffichageSuivantOrientation:(UIInterfaceOrientation) o {
+//--------------------------------------------------------------------------------------------------------
+-(void) vdeAffichageSuivantOrientation:(UIInterfaceOrientation) o {
 	//--------------------------------------------------------------------------------------------------------
 	
 	
@@ -343,7 +348,6 @@
 // LES ACTIONS
 //--------------------------------------------------------------------------------------------------------
 
-
 -(void) vdeActionStepperChoixPhotos : (UIStepper *) sender {
 //--------------------------------------------------------------------------------------------------------
 	
@@ -356,7 +360,6 @@
 	
 	[self vdeAffichePhoto];
 }
-
 
 -(void) vdeActionSliderLargeur:(UISlider*) sender {
 //--------------------------------------------------------------------------------------------------------
@@ -371,7 +374,6 @@
 	vdeLabelRatioHauteur.text = [NSString stringWithFormat:@"%d %%", vdeSliderHauteurValeur];
 	[self vdeRedimensionnePhoto];
 }
-
 
 -(void) vdeActionSegmentZoom: (UISegmentedControl*) sender {
 //--------------------------------------------------------------------------------------------------------
@@ -402,6 +404,9 @@
 	vdeLabelRatioHauteur.text	= [NSString stringWithFormat:@"%d %%", vdeValeurSegmentZoom];
 
 	vdeSegmentedControlZoom.selectedSegmentIndex = -1; // ruse de sioux pour déselectionner les segments
+
+	// on donne la nouvelle valeur du zoom à la propriété zoomScale qui est utilsé par la methode viewForZoomingInScrollView:
+	vdeScrollViewZoneZoomPhoto.zoomScale = vdeValeurSegmentZoom/100;
 	
 	[self vdeRedimensionnePhoto];
 	
@@ -412,11 +417,13 @@
 //--------------------------------------------------------------------------------------------------------
 
 -(void) vdeAffichePhoto {
+//--------------------------------------------------------------------------------------------------------
 	
 	vdePhotoAAfficher						= [UIImage imageNamed:vdeLabelNomPhoto.text];
-	vdeVueImageAInclureDansScrollView.image =vdePhotoAAfficher;
-	vdeSliderLargeur.value					= 25;
-	vdeSliderHauteur.value					= 25;
+	vdeVueImageAInclureDansScrollView.image= vdePhotoAAfficher;
+	vdeSliderLargeur.value				= 25;
+	vdeSliderHauteur.value				= 25;
+	vdeScrollViewZoneZoomPhoto.zoomScale	= 0.25; // pour synchro avec méthode zoom pinch
 	vdeLabelRatioLargeur.text				= [NSString stringWithFormat:@"%d %%", 25];
 	vdeLabelRatioHauteur.text				= [NSString stringWithFormat:@"%d %%", 25];
 
@@ -424,17 +431,13 @@
 	
 }
 
-//--------------------------------------------------------------------------------------------------------
-
 -(void) vdeRedimensionnePhoto {
+//--------------------------------------------------------------------------------------------------------
 	
-	int vdeTailleImageLargeur		= vdePhotoAAfficher.size.width*(vdeSliderLargeur.value/100);
-	int vdeTailleImageHauteur		= vdePhotoAAfficher.size.height*(vdeSliderHauteur.value/100);
+	int vdeTailleImageLargeur		= vdePhotoAAfficher.size.width*(vdeSliderLargeur.value/100.0);
+	int vdeTailleImageHauteur		= vdePhotoAAfficher.size.height*(vdeSliderHauteur.value/100.0);
 
-	[vdeVueImageAInclureDansScrollView			setFrame:CGRectMake(0,
-																		0,
-																		vdeTailleImageLargeur,
-																		vdeTailleImageHauteur)];
+	[vdeVueImageAInclureDansScrollView			setFrame:CGRectMake(0,0,vdeTailleImageLargeur,vdeTailleImageHauteur)];
 	
 	
 	// On donne la taille de la vue à l'intérieur de la subview pour permettre le glisser jusqu'au limite de l'image
@@ -447,21 +450,43 @@
 
 }
 
+-(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
 //--------------------------------------------------------------------------------------------------------
 
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-	// pour le pinch zoom
+	// pour le zoom pinch
+	
+	/*
+	 int vdeTailleImageLargeur		= vdePhotoAAfficher.size.width*(vdeSliderLargeur.value/100.0);
+	int vdeTailleImageHauteur		= vdePhotoAAfficher.size.height*(vdeSliderHauteur.value/100.0);
+	
+	[vdeVueImageAInclureDansScrollView			setFrame:CGRectMake(0,0,vdeTailleImageLargeur,vdeTailleImageHauteur)];
+	 */
+	 
 	return vdeVueImageAInclureDansScrollView;
+
 }
 
+-(void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
 //--------------------------------------------------------------------------------------------------------
+// pour afficher la nouvelle valeur de zoom  suite au pinch mais...quand l'image zoomée est déjà déformée, c'est un peu faux....
+	
+	float vdeZoomScale			= scrollView.zoomScale;
 
-- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
-	// pour afficher la nouvelel valeur de zoom mais...quand l'image zoomée est déjà déformée, c'est un peu faux....
-	vdeSliderLargeur.value		= scale;
-	vdeSliderHauteur.value		= scale;
-	vdeLabelRatioLargeur.text	= [NSString stringWithFormat:@"%d %%",(int) (scale*100)];
-	vdeLabelRatioHauteur.text	= [NSString stringWithFormat:@"%d %%",(int) (scale*100)];
+	vdeSliderLargeur.value		= vdeZoomScale*100;
+	vdeSliderHauteur.value		= vdeZoomScale*100;
+	vdeLabelRatioLargeur.text		= [NSString stringWithFormat:@"%d %%",(int) (vdeZoomScale*100)];
+	vdeLabelRatioHauteur.text		= [NSString stringWithFormat:@"%d %%",(int) (vdeZoomScale*100)];
+}
+
+-(void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view {
+//--------------------------------------------------------------------------------------------------------
+	/*
+	 CGSize vdeTailleMaxPourZoomer;
+	vdeTailleMaxPourZoomer.width	= 5000;
+	vdeTailleMaxPourZoomer.height	= 5000;
+	vdeScrollViewZoneZoomPhoto.contentSize	= vdeTailleMaxPourZoomer;
+	[vdeScrollViewZoneZoomPhoto setNeedsDisplay];
+	 */
 }
 
 @end
