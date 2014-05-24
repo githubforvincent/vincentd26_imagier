@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "VDEMyView.h"
+#import "VDEDataControllerImagier.h"
 
 @interface VDEViewController : UIViewController {
-    VDEMyView *vue;
+    VDEMyView					*vue;
+	VDEDataControllerImagier	*vdeControleurDonnes;
 }
 
 @end

@@ -45,6 +45,9 @@
 		1255BEF3192E8A50009017CB /* photo-18.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1255BEDF192E8A50009017CB /* photo-18.jpg */; };
 		1255BEF4192E8A50009017CB /* photo-19.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1255BEE0192E8A50009017CB /* photo-19.jpg */; };
 		1255BEF5192E8A50009017CB /* photo-20.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1255BEE1192E8A50009017CB /* photo-20.jpg */; };
+		12BE461A193121430024C09E /* VDEPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BE4619193121430024C09E /* VDEPhotoSource.m */; };
+		12BE461E1931226A0024C09E /* VDEPhotoPourAfficher.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BE461D1931226A0024C09E /* VDEPhotoPourAfficher.m */; };
+		12BE4625193123F60024C09E /* VDEDataControllerImagier.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BE4624193123F60024C09E /* VDEDataControllerImagier.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,13 +69,13 @@
 		123E615B192DF4A400AFAF26 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		123E615D192DF4A400AFAF26 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		123E615F192DF4A400AFAF26 /* vincentd26_imagier-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "vincentd26_imagier-Prefix.pch"; sourceTree = "<group>"; };
-		123E6160192DF4A400AFAF26 /* VDEAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VDEAppDelegate.h; sourceTree = "<group>"; };
-		123E6161192DF4A400AFAF26 /* VDEAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VDEAppDelegate.m; sourceTree = "<group>"; };
+		123E6160192DF4A400AFAF26 /* VDEAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VDEAppDelegate.h; path = vincentd26_imagier/VDEAppDelegate.h; sourceTree = "<group>"; };
+		123E6161192DF4A400AFAF26 /* VDEAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = VDEAppDelegate.m; path = vincentd26_imagier/VDEAppDelegate.m; sourceTree = "<group>"; };
 		123E6164192DF4A400AFAF26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		123E6167192DF4A400AFAF26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		123E6169192DF4A400AFAF26 /* VDEViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VDEViewController.h; sourceTree = "<group>"; };
 		123E616A192DF4A400AFAF26 /* VDEViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VDEViewController.m; sourceTree = "<group>"; };
-		123E616C192DF4A400AFAF26 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		123E616C192DF4A400AFAF26 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = vincentd26_imagier/Images.xcassets; sourceTree = "<group>"; };
 		123E6172192DF4A400AFAF26 /* vincentd26_imagierTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vincentd26_imagierTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		123E6173192DF4A400AFAF26 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		123E617B192DF4A400AFAF26 /* vincentd26_imagierTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "vincentd26_imagierTests-Info.plist"; sourceTree = "<group>"; };
@@ -102,6 +105,12 @@
 		1255BEDF192E8A50009017CB /* photo-18.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "photo-18.jpg"; sourceTree = "<group>"; };
 		1255BEE0192E8A50009017CB /* photo-19.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "photo-19.jpg"; sourceTree = "<group>"; };
 		1255BEE1192E8A50009017CB /* photo-20.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "photo-20.jpg"; sourceTree = "<group>"; };
+		12BE4618193121430024C09E /* VDEPhotoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDEPhotoSource.h; sourceTree = "<group>"; };
+		12BE4619193121430024C09E /* VDEPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDEPhotoSource.m; sourceTree = "<group>"; };
+		12BE461C1931226A0024C09E /* VDEPhotoPourAfficher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDEPhotoPourAfficher.h; sourceTree = "<group>"; };
+		12BE461D1931226A0024C09E /* VDEPhotoPourAfficher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDEPhotoPourAfficher.m; sourceTree = "<group>"; };
+		12BE4623193123F60024C09E /* VDEDataControllerImagier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDEDataControllerImagier.h; sourceTree = "<group>"; };
+		12BE4624193123F60024C09E /* VDEDataControllerImagier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDEDataControllerImagier.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +141,9 @@
 			isa = PBXGroup;
 			children = (
 				123E6157192DF4A400AFAF26 /* vincentd26_imagier */,
+				123E6160192DF4A400AFAF26 /* VDEAppDelegate.h */,
+				123E6161192DF4A400AFAF26 /* VDEAppDelegate.m */,
+				123E616C192DF4A400AFAF26 /* Images.xcassets */,
 				123E6179192DF4A400AFAF26 /* vincentd26_imagierTests */,
 				123E6150192DF4A400AFAF26 /* Frameworks */,
 				123E614F192DF4A400AFAF26 /* Products */,
@@ -161,15 +173,10 @@
 		123E6157192DF4A400AFAF26 /* vincentd26_imagier */ = {
 			isa = PBXGroup;
 			children = (
-				123E6189192DFDB100AFAF26 /* VDEMyView.h */,
-				123E618A192DFDB100AFAF26 /* VDEMyView.m */,
-				123E6160192DF4A400AFAF26 /* VDEAppDelegate.h */,
-				123E6161192DF4A400AFAF26 /* VDEAppDelegate.m */,
-				123E6163192DF4A400AFAF26 /* Main_iPhone.storyboard */,
-				123E6166192DF4A400AFAF26 /* Main_iPad.storyboard */,
-				123E6169192DF4A400AFAF26 /* VDEViewController.h */,
-				123E616A192DF4A400AFAF26 /* VDEViewController.m */,
-				123E616C192DF4A400AFAF26 /* Images.xcassets */,
+				12BE461B1931220E0024C09E /* Photo source */,
+				12BE461F193122C70024C09E /* Photo pour afficher */,
+				12BE4620193122E80024C09E /* Vue Controleur */,
+				12BE4622193123A20024C09E /* Data Controller */,
 				1255BEA5192E8A01009017CB /* Photos */,
 				123E6190192E0A5C00AFAF26 /* Images */,
 				123E6158192DF4A400AFAF26 /* Supporting Files */,
@@ -180,6 +187,7 @@
 		123E6158192DF4A400AFAF26 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				12BE46211931233E0024C09E /* StoryBoard */,
 				123E6159192DF4A400AFAF26 /* vincentd26_imagier-Info.plist */,
 				123E615A192DF4A400AFAF26 /* InfoPlist.strings */,
 				123E615D192DF4A400AFAF26 /* main.m */,
@@ -240,6 +248,54 @@
 				1255BEE1192E8A50009017CB /* photo-20.jpg */,
 			);
 			name = Photos;
+			sourceTree = "<group>";
+		};
+		12BE461B1931220E0024C09E /* Photo source */ = {
+			isa = PBXGroup;
+			children = (
+				12BE4618193121430024C09E /* VDEPhotoSource.h */,
+				12BE4619193121430024C09E /* VDEPhotoSource.m */,
+			);
+			name = "Photo source";
+			sourceTree = "<group>";
+		};
+		12BE461F193122C70024C09E /* Photo pour afficher */ = {
+			isa = PBXGroup;
+			children = (
+				12BE461D1931226A0024C09E /* VDEPhotoPourAfficher.m */,
+				12BE461C1931226A0024C09E /* VDEPhotoPourAfficher.h */,
+			);
+			name = "Photo pour afficher";
+			sourceTree = "<group>";
+		};
+		12BE4620193122E80024C09E /* Vue Controleur */ = {
+			isa = PBXGroup;
+			children = (
+				123E6189192DFDB100AFAF26 /* VDEMyView.h */,
+				123E618A192DFDB100AFAF26 /* VDEMyView.m */,
+				123E6169192DF4A400AFAF26 /* VDEViewController.h */,
+				123E616A192DF4A400AFAF26 /* VDEViewController.m */,
+			);
+			name = "Vue Controleur";
+			sourceTree = "<group>";
+		};
+		12BE46211931233E0024C09E /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				123E6166192DF4A400AFAF26 /* Main_iPad.storyboard */,
+				123E6163192DF4A400AFAF26 /* Main_iPhone.storyboard */,
+			);
+			name = StoryBoard;
+			sourceTree = "<group>";
+		};
+		12BE4622193123A20024C09E /* Data Controller */ = {
+			isa = PBXGroup;
+			children = (
+				12BE4623193123F60024C09E /* VDEDataControllerImagier.h */,
+				12BE4624193123F60024C09E /* VDEDataControllerImagier.m */,
+			);
+			name = "Data Controller";
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,7 +422,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12BE461E1931226A0024C09E /* VDEPhotoPourAfficher.m in Sources */,
 				123E6162192DF4A400AFAF26 /* VDEAppDelegate.m in Sources */,
+				12BE461A193121430024C09E /* VDEPhotoSource.m in Sources */,
+				12BE4625193123F60024C09E /* VDEDataControllerImagier.m in Sources */,
 				123E615E192DF4A400AFAF26 /* main.m in Sources */,
 				123E618B192DFDB100AFAF26 /* VDEMyView.m in Sources */,
 				123E616B192DF4A400AFAF26 /* VDEViewController.m in Sources */,

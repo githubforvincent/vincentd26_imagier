@@ -16,23 +16,32 @@
 
 @implementation VDEViewController
 
+
+- (void)viewDidLoad {
+	//--------------------------------------------------------------------------------------------------------
+    
+    [super viewDidLoad];
+    // initialisation vue
+	vue = [[VDEMyView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [[self view] addSubview:vue];
+	
+	//Initialisation controleur
+	vdeControleurDonnes = [[VDEDataControllerImagier alloc] initWithTableauDesPhotos];
+	
+
+}
+
 -(BOOL) shouldAutorotate {
 	//--------------------------------------------------------------------------------------------------------
     return YES;
 }
 
--(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)o duration:(NSTimeInterval)d
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)o duration:(NSTimeInterval)d {
 //--------------------------------------------------------------------------------------------------------
-{
+
     [vue vdeAffichageSuivantOrientation:o];
     
 }
-- (void)viewDidLoad {
-	//--------------------------------------------------------------------------------------------------------
-    
-    [super viewDidLoad];
-    vue = [[VDEMyView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [[self view] addSubview:vue];}
 
 - (void)didReceiveMemoryWarning {
 	//--------------------------------------------------------------------------------------------------------
@@ -40,6 +49,12 @@
     NSLog(@"Alerte mémoire");
     
     
+}
+
+-(void) vdeDemandeTableauDesPhotosOriginales {
+//--------------------------------------------------------------------------------------------------------
+	
+	
 }
 
 
