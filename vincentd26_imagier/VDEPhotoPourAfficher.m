@@ -10,4 +10,9 @@
 
 @implementation VDEPhotoPourAfficher
 
+
+-(void) setVdeValeursZoom: (CGSize) zoom {
+	_vdeValeursZoom = zoom;
+	
+}
 @end

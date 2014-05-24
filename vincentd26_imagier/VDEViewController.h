@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "VDEMyView.h"
 #import "VDEDataControllerImagier.h"
+#import "VDEPhotoPourAfficher.h"
 
 @interface VDEViewController : UIViewController {
     VDEMyView					*vue;
-	VDEDataControllerImagier	*vdeControleurDonnes;
+	VDEDataControllerImagier	*vdeDataControleurPhotos;
 }
+	
+-(VDEPhotoPourAfficher*)	vdeDemandePhotosAAfficher : (int) index;
+
+-(void) vdeMiseAJourZoomLargeur:(float)largeur
+					zoomHauteur:(float)hauteur
+		  pourLaPhotoAIndex:(int) index;
 
 @end

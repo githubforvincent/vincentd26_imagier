@@ -17,27 +17,39 @@
 
 -(id) initWithTableauDesPhotos {
 	self=[super init];
-	
-	//création du tableau des photos
+	[self vdeInitialisationTableauDesPhotos];
+			
+	return self;
+}
+
+
+-(void) vdeInitialisationTableauDesPhotos {
+//--------------------------------------------------------------------------------
+
+	// methode de construction du tableau initial
+	// i suffira de modifier ici au cas ou le sphotos viendrait d'une autre source
+	// Ici, il faudrait d'ailleurs lire le nombre de photo dans un répertoire pour lire leur nom etc.. , mais ça,
+	// on verra plus tard !!
+
 	int vdeNombreDePhotos = 20;
 	self.vdeTableauDesPhotosOriginales = [[NSMutableArray alloc] initWithCapacity:vdeNombreDePhotos ];
 	
-	VDEPhotoSource * vdePhotoSource = [[VDEPhotoSource alloc] init];
 	
+
 	for ( int iteration=0; iteration < vdeNombreDePhotos; iteration++) {
+	
+		VDEPhotoSource * vdePhoto = [[VDEPhotoSource alloc] init];
 		
 		NSString *vdeNomPhotoAInserer =  [NSString stringWithFormat:@"photo-%.2d.jpg",iteration+1];
-		vdePhotoSource.vdeNomPhotoSource = vdeNomPhotoAInserer;
+		vdePhoto.vdeNomPhotoSource = vdeNomPhotoAInserer;
 		
 		UIImage * vdeImagePhotoSource		= [UIImage imageNamed:vdeNomPhotoAInserer];
-		vdePhotoSource.vdeTaillePhotoSource =  vdeImagePhotoSource.size;
+		vdePhoto.vdeTaillePhotoSource =  vdeImagePhotoSource.size;
 		
-		[self.vdeTableauDesPhotosOriginales addObject:vdePhotoSource];
-		
-	}
-		
+		[self.vdeTableauDesPhotosOriginales addObject:vdePhoto];
 	
-	return self;
+	}
+
 }
 
 

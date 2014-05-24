@@ -8,8 +8,12 @@
 
 
 #import "VDEMyView.h"
+#import "VDEPhotoPourAfficher.h"
+#import "VDEViewController.h"
 
 @interface VDEMyView ()
+
+@property (nonatomic, strong) VDEPhotoPourAfficher *vdePhotoPourAfficher;
 
 @end
 
@@ -24,20 +28,23 @@
 //--------------------------------------------------------------------------------------------------------
     
     self= [super initWithFrame:frame ];
-	
+	if( self) {
+		
+	self.vdeViewControllerImagier	= [[VDEViewController alloc] init];
+		self.vdePhotoPourAfficher	= [[VDEPhotoPourAfficher alloc]init];
 
     // Détermination type de terminal si besoin par la suite
 	//--------------------------------------------------------------------------------------------------------
-	if( self) {
+
         // recuperation du type de terminal
         if ( [[UIDevice currentDevice] userInterfaceIdiom ]== UIUserInterfaceIdiomPhone) {
-            isIpad = NO;
+            self.isIpad = NO;
 			vdeValeurZoomDeDepart = 10;
         } else {
-            isIpad = YES;
+            self.isIpad = YES;
 			vdeValeurZoomDeDepart = 25;
         }
-    }
+    
 	
 	// initialisation de la scrollView
 	//--------------------------------------------------------------------------------------------------------
@@ -61,13 +68,14 @@
 	
 	//configuration du Stepper choix photo
     //--------------------------------------------------------------------------------------------------------
-    vdeStepperChoixPhotos = [[UIStepper alloc] init];
-    vdeStepperChoixPhotos.maximumValue     = 20;
-    vdeStepperChoixPhotos.minimumValue     = 1;
-    vdeStepperChoixPhotos.stepValue        = 1;
-    [vdeStepperChoixPhotos addTarget:self action:@selector(vdeActionStepperChoixPhotos:) forControlEvents:UIControlEventValueChanged];
+    self.vdeStepperChoixPhotos				   = [[UIStepper alloc] init];
+    self.vdeStepperChoixPhotos.maximumValue     = 20;
+    self.vdeStepperChoixPhotos.minimumValue     = 1;
+    self.vdeStepperChoixPhotos.stepValue        = 1;
+	self.vdeStepperChoixPhotos.Value			   = 1;
+    [self.vdeStepperChoixPhotos addTarget:self action:@selector(vdeActionStepperChoixPhotos:) forControlEvents:UIControlEventValueChanged];
 	
-    [vdeSousVueHaut addSubview:vdeStepperChoixPhotos];
+    [vdeSousVueHaut addSubview:self.vdeStepperChoixPhotos];
 
 	
 	// configuration du label nom de photo
@@ -160,12 +168,13 @@
 	
     // positionnement des frames
     //--------------------------------------------------------------------------------------------------------
-    [self vdeAffichageSuivantOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
-	// on recupere l'orientation de la status bar pour connaitre l'orientation ( astuce UPMC )
+    // on recupere l'orientation de la status bar pour connaitre l'orientation ( astuce UPMC )
+	[self vdeAffichageSuivantOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
+
+		
+	} // fin du if self
     
-	[ self vdeAffichePhoto];
-	
-    return self;
+	return self;
 }
 
 //--------------------------------------------------------------------------------------------------------
@@ -232,7 +241,7 @@
 	int vdeLargeurStepperChoixPhotos		= vdeLargeurVue/4; // 1/4 de la largeur
 	int vdeHauteurStepperChoixPhotos		= vdeHauteurSousVueHaut*vdeRatioHauteurElementZoneHaut;
 	
-	[vdeStepperChoixPhotos setFrame:CGRectMake(vdeXStepperChoixPhotos,
+	[self.vdeStepperChoixPhotos setFrame:CGRectMake(vdeXStepperChoixPhotos,
 												 vdeYStepperChoixPhotos,
 												 vdeLargeurStepperChoixPhotos,
 												 vdeHauteurStepperChoixPhotos)];
@@ -344,6 +353,8 @@
 											vdeYSousVueBas,
 											vdeLargeurSousVueBas,
 											vdeHauteurSousVueBas)];
+
+
 }
 
 //--------------------------------------------------------------------------------------------------------
@@ -353,15 +364,12 @@
 -(void) vdeActionStepperChoixPhotos : (UIStepper *) sender {
 //--------------------------------------------------------------------------------------------------------
 	
-
-	if( sender.value < 10) {
-		vdeLabelNomPhoto.text = [NSString stringWithFormat:@"%@%d%@",@"photo-0",(int)sender.value,@".jpg"];
-	} else {
-		vdeLabelNomPhoto.text = [NSString stringWithFormat:@"%@%d%@",@"photo-",(int)sender.value,@".jpg"];
-	}
+	self.vdePhotoPourAfficher = [self.vdeViewControllerImagier vdeDemandePhotosAAfficher:(int) sender.value];
+	//NSLog(@"stepper : %@", self.vdePhotoPourAfficher.vdeNomPhotoSource);
 	
-	[self vdeAffichePhoto];
+	[self vdeAffichePhoto: self.vdePhotoPourAfficher];
 }
+
 
 -(void) vdeActionSliderLargeur:(UISlider*) sender {
 //--------------------------------------------------------------------------------------------------------
@@ -418,17 +426,23 @@
 // LES ACTIONS DANS LE SCROLL VIEW
 //--------------------------------------------------------------------------------------------------------
 
--(void) vdeAffichePhoto {
+-(void) vdeAffichePhoto: (VDEPhotoPourAfficher *) photo {
 //--------------------------------------------------------------------------------------------------------
 	
-	vdePhotoAAfficher						= [UIImage imageNamed:vdeLabelNomPhoto.text];
+	
+	
+	vdePhotoAAfficher						= [UIImage imageNamed:photo.vdeNomPhotoSource];
+	//NSLog(@"nom photo : %@", photo.vdeNomPhotoSource);
 	vdeVueImageAInclureDansScrollView.image	= vdePhotoAAfficher;
-	vdeSliderLargeur.value					= vdeValeurZoomDeDepart;
-	vdeSliderHauteur.value					= vdeValeurZoomDeDepart;
-	vdeScrollViewZoneZoomPhoto.zoomScale	= vdeValeurZoomDeDepart/100; // pour synchro avec méthode zoom pinch
-	vdeLabelRatioLargeur.text				= [NSString stringWithFormat:@"%d %%", vdeValeurZoomDeDepart];
-	vdeLabelRatioHauteur.text				= [NSString stringWithFormat:@"%d %%", vdeValeurZoomDeDepart];
-
+	vdeSliderLargeur.value					= (int)((photo.vdeValeursZoom.width)*100);
+	vdeSliderHauteur.value					= (int)((photo.vdeValeursZoom.height)*100);
+	NSLog(@"valeur zoom recue : %f", vdeSliderLargeur.value);
+	vdeScrollViewZoneZoomPhoto.zoomScale	= photo.vdeValeursZoom.width/100; // pour synchro avec méthode zoom pinch // ( width = height )
+	vdeLabelRatioLargeur.text				= [NSString stringWithFormat:@"%d %%", (int)vdeSliderLargeur.value	];
+	vdeLabelRatioHauteur.text				= [NSString stringWithFormat:@"%d %%", (int)vdeSliderHauteur.value];
+	
+	
+	
 	[self vdeRedimensionnePhoto];
 	
 }
@@ -436,8 +450,11 @@
 -(void) vdeRedimensionnePhoto {
 //--------------------------------------------------------------------------------------------------------
 	
-	int vdeTailleImageLargeur		= vdePhotoAAfficher.size.width*(vdeSliderLargeur.value/100.0);
-	int vdeTailleImageHauteur		= vdePhotoAAfficher.size.height*(vdeSliderHauteur.value/100.0);
+	float vdeValeurZoomLargeur = vdeSliderLargeur.value/100.0;
+	float vdeValeurZoomHauteur = vdeSliderHauteur.value/100.0;
+	
+	int vdeTailleImageLargeur		= vdePhotoAAfficher.size.width*vdeValeurZoomLargeur;
+	int vdeTailleImageHauteur		= vdePhotoAAfficher.size.height*vdeValeurZoomHauteur ;
 
 	[vdeVueImageAInclureDansScrollView	setFrame:CGRectMake(0,0,vdeTailleImageLargeur,vdeTailleImageHauteur)];
 	
@@ -449,8 +466,16 @@
 	vdeTailleMaxPourGlisser.height	= vdeTailleImageHauteur;
 	vdeScrollViewZoneZoomPhoto.contentSize	= vdeTailleMaxPourGlisser;
 	[vdeScrollViewZoneZoomPhoto setNeedsDisplay];
+	
+	// on met à jour le tableau des photos avec les nouvelle valeur de zoom
+	//self.vdePhotoPourAfficher.vdeValeursZoom.width = vdeTailleImageLargeur;
+	
+	
+	 [self.vdeViewControllerImagier vdeMiseAJourZoomLargeur:vdeValeurZoomLargeur
+											   zoomHauteur:vdeValeurZoomHauteur
+										 pourLaPhotoAIndex:(int) self.vdeStepperChoixPhotos.value];
 
-}
+	 }
 
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
 //--------------------------------------------------------------------------------------------------------
@@ -462,12 +487,17 @@
 //--------------------------------------------------------------------------------------------------------
 // pour afficher la nouvelle valeur de zoom  suite au pinch mais...quand l'image zoomée est déjà déformée, c'est un peu faux....
 	
-	float vdeZoomScale			= scrollView.zoomScale;
+	float vdeZoomScale				= scrollView.zoomScale;
 
-	vdeSliderLargeur.value		= vdeZoomScale*100;
-	vdeSliderHauteur.value		= vdeZoomScale*100;
+	vdeSliderLargeur.value			= vdeZoomScale*100;
+	vdeSliderHauteur.value			= vdeZoomScale*100;
 	vdeLabelRatioLargeur.text		= [NSString stringWithFormat:@"%d %%",(int) (vdeZoomScale*100)];
 	vdeLabelRatioHauteur.text		= [NSString stringWithFormat:@"%d %%",(int) (vdeZoomScale*100)];
+	
+	[self.vdeViewControllerImagier vdeMiseAJourZoomLargeur:vdeZoomScale
+											   zoomHauteur:vdeZoomScale
+										 pourLaPhotoAIndex:(int) self.vdeStepperChoixPhotos.value];
+	
 }
 
 -(void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view {

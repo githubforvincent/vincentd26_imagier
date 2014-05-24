@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		120B3D1F193167A600A220C3 /* VDEDataControllerImagier.m in Sources */ = {isa = PBXBuildFile; fileRef = 120B3D1D193167A600A220C3 /* VDEDataControllerImagier.m */; };
 		123E6152192DF4A400AFAF26 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 123E6151192DF4A400AFAF26 /* Foundation.framework */; };
 		123E6154192DF4A400AFAF26 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 123E6153192DF4A400AFAF26 /* CoreGraphics.framework */; };
 		123E6156192DF4A400AFAF26 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 123E6155192DF4A400AFAF26 /* UIKit.framework */; };
@@ -47,7 +48,6 @@
 		1255BEF5192E8A50009017CB /* photo-20.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1255BEE1192E8A50009017CB /* photo-20.jpg */; };
 		12BE461A193121430024C09E /* VDEPhotoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BE4619193121430024C09E /* VDEPhotoSource.m */; };
 		12BE461E1931226A0024C09E /* VDEPhotoPourAfficher.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BE461D1931226A0024C09E /* VDEPhotoPourAfficher.m */; };
-		12BE4625193123F60024C09E /* VDEDataControllerImagier.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BE4624193123F60024C09E /* VDEDataControllerImagier.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		120B3D1D193167A600A220C3 /* VDEDataControllerImagier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VDEDataControllerImagier.m; path = vincentd26_imagier/VDEDataControllerImagier.m; sourceTree = "<group>"; };
+		120B3D1E193167A600A220C3 /* VDEDataControllerImagier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VDEDataControllerImagier.h; path = vincentd26_imagier/VDEDataControllerImagier.h; sourceTree = "<group>"; };
 		123E614E192DF4A400AFAF26 /* vincentd26_imagier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vincentd26_imagier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		123E6151192DF4A400AFAF26 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		123E6153192DF4A400AFAF26 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -109,8 +111,6 @@
 		12BE4619193121430024C09E /* VDEPhotoSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDEPhotoSource.m; sourceTree = "<group>"; };
 		12BE461C1931226A0024C09E /* VDEPhotoPourAfficher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDEPhotoPourAfficher.h; sourceTree = "<group>"; };
 		12BE461D1931226A0024C09E /* VDEPhotoPourAfficher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDEPhotoPourAfficher.m; sourceTree = "<group>"; };
-		12BE4623193123F60024C09E /* VDEDataControllerImagier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDEDataControllerImagier.h; sourceTree = "<group>"; };
-		12BE4624193123F60024C09E /* VDEDataControllerImagier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDEDataControllerImagier.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,8 +262,8 @@
 		12BE461F193122C70024C09E /* Photo pour afficher */ = {
 			isa = PBXGroup;
 			children = (
-				12BE461D1931226A0024C09E /* VDEPhotoPourAfficher.m */,
 				12BE461C1931226A0024C09E /* VDEPhotoPourAfficher.h */,
+				12BE461D1931226A0024C09E /* VDEPhotoPourAfficher.m */,
 			);
 			name = "Photo pour afficher";
 			sourceTree = "<group>";
@@ -291,8 +291,8 @@
 		12BE4622193123A20024C09E /* Data Controller */ = {
 			isa = PBXGroup;
 			children = (
-				12BE4623193123F60024C09E /* VDEDataControllerImagier.h */,
-				12BE4624193123F60024C09E /* VDEDataControllerImagier.m */,
+				120B3D1D193167A600A220C3 /* VDEDataControllerImagier.m */,
+				120B3D1E193167A600A220C3 /* VDEDataControllerImagier.h */,
 			);
 			name = "Data Controller";
 			path = ..;
@@ -422,10 +422,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				120B3D1F193167A600A220C3 /* VDEDataControllerImagier.m in Sources */,
 				12BE461E1931226A0024C09E /* VDEPhotoPourAfficher.m in Sources */,
 				123E6162192DF4A400AFAF26 /* VDEAppDelegate.m in Sources */,
 				12BE461A193121430024C09E /* VDEPhotoSource.m in Sources */,
-				12BE4625193123F60024C09E /* VDEDataControllerImagier.m in Sources */,
 				123E615E192DF4A400AFAF26 /* main.m in Sources */,
 				123E618B192DFDB100AFAF26 /* VDEMyView.m in Sources */,
 				123E616B192DF4A400AFAF26 /* VDEViewController.m in Sources */,

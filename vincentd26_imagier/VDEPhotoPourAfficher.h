@@ -10,6 +10,8 @@
 
 @interface VDEPhotoPourAfficher : VDEPhotoSource
 
-@property CGFloat vdeValeursZoom;
+@property (nonatomic) CGSize vdeValeursZoom;
+
+// CGSize parce qu'il y a déjà deux valeurs width et height et qua ça ma va bien pour le zoom aussi
 
 @end

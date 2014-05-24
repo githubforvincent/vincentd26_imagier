@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class VDEViewController;
 
 @interface VDEMyView : UIView < UIScrollViewDelegate > {
 	
 	UISegmentedControl	*vdeSegmentedControlZoom;
-	UIStepper			*vdeStepperChoixPhotos;
+
 	
 	UIScrollView		*vdeScrollViewZoneZoomPhoto;
 	
@@ -31,10 +32,17 @@
 	UIImageView			*vdeVueImageAInclureDansScrollView;
 	
 	CGRect				vdeMaFrame;
-	BOOL				isIpad;
 	UIImageView			*vdeImageEspace;
 	int					vdeValeurZoomDeDepart;
+	
 }
+
+@property (nonatomic) BOOL	isIpad;
+@property (nonatomic, strong ) VDEViewController * vdeViewControllerImagier;
+@property (nonatomic, strong) 	UIStepper			*vdeStepperChoixPhotos;
+
+
 - (void) vdeAffichageSuivantOrientation:(UIInterfaceOrientation) o;
+- (void) vdeActionStepperChoixPhotos : (UIStepper *) sender;
 
 @end
