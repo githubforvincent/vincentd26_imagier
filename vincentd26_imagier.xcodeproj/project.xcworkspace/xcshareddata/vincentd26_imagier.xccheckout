@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3F0C38AF-DA8C-4937-AFF6-05B967D21631</string>
+	<key>IDESourceControlProjectName</key>
+	<string>vincentd26_imagier</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>496CED84-71AC-4004-B340-89BE03051779</key>
+		<string>https://github.com/githubforvincent/vincentd26_imagier.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>vincentd26_imagier.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>496CED84-71AC-4004-B340-89BE03051779</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/githubforvincent/vincentd26_imagier.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>496CED84-71AC-4004-B340-89BE03051779</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>496CED84-71AC-4004-B340-89BE03051779</string>
+			<key>IDESourceControlWCCName</key>
+			<string>vincentd26_imagier MVC</string>
+		</dict>
+	</array>
+</dict>
+</plist>
